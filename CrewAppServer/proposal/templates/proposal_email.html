@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal from GreenSchedule</title>
+</head>
+<body>
+    <h1>Proposal from GreenSchedule</h1>
+    <p>Dear {{ proposal.customer.fullname }},</p>
+    <p>We are pleased to present our proposal for the requested services. Please find the details below:</p>
+
+    <table>
+        <tr>
+            <td>Company Name:</td>
+            <td>GreenSchedule</td>
+        </tr>
+        <tr>
+            <td>Phone Number:</td>
+            <td>(123) 456-7890</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>info@greenschedule.com</td>
+        </tr>
+    </table>
+
+    <h3>Customer Information</h3>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td>{{ proposal.customer.fullname }}</td>
+        </tr>
+        <tr>
+            <td>Phone:</td>
+            <td>{{ proposal.customer.phone }}</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>{{ proposal.customer.email }}</td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td>{{ proposal.customer.address }}</td>
+        </tr>
+    </table>
+
+    <h3>Service Summary</h3>
+    <table>
+        <tr>
+            <th>Service Name</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+        </tr>
+        {% for item in proposal_items %}
+        <tr>
+            <td>{{ item.service_item.name }}</td>
+            <td>{{ item.service_item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.service_item.price_per_unit }}</td>
+            <td>${{ item.calculate_price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Summary</h3>
+    <table>
+        <tr>
+            <td>Subtotal:</td>
+            <td>${{ proposal.total_price_before_tax }}</td>
+        </tr>
+        <tr>
+            <td>Tax:</td>
+            <td>${{ proposal.total_tax }}</td>
+        </tr>
+        <tr>
+            <td>Discount:</td>
+            <td>-${{ proposal.total_discount }}</td>
+        </tr>
+        <tr>
+            <td>Total:</td>
+            <td>${{ proposal.total_price }}</td>
+        </tr>
+    </table>
+
+    <p>Send Date: {{ proposal.send_date }}</p>
+    <p>Valid Date: {{ proposal.valid_date }}</p>
+
+    <a href="http://akjol.localhost:8000/api/v1/proposal/manage-proposals/accept/{{ proposal.id }}">Accept Proposal</a>
+    <a href="http://akjol.localhost:8000/api/v1/proposal/manage-proposals/reject/{{ proposal.id }}">Reject Proposal</a>
+</body>
+</html>
