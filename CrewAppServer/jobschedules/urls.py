@@ -11,5 +11,4 @@ router.register(r'assignedjobs', views.AssignedJobViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('chatbot_langchain/', chatbot_langchain.chatbot_view, name='chatbot_langchain')  # Ensure the correct import and path
-
 ]

@@ -112,10 +112,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'CrewApp.wsgi.application'
 
 CORS_ALLOW_METHODS = [
+    'DELETE',
     'GET',
+    'OPTIONS',  # Required for preflight requests
+    'PATCH',    # Required for your PATCH request
     'POST',
     'PUT',
-    'DELETE',
 ]
 
 

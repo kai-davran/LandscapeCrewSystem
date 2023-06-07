@@ -52,7 +52,7 @@ def chatbot_view(request):
 
                 response = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, json=payload)
 
-                if response.status_code == 200):
+                if response.status_code == 200:
                     bot_response = response.json()['choices'][0]['message']['content'].strip()
                     return JsonResponse({'response': bot_response})
                 else:

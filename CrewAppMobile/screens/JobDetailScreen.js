@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert, Linking } from 'react-native';
 import axios from 'axios';
-import {BACKEND_URL} from '@env'
+import {BACKEND_URL} from '@env';
+import { Platform } from 'react-native';
 
 const JobDetailScreen = ({ route, navigation }) => {
   const { jobId, crewId } = route.params;
@@ -234,11 +235,20 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#ffffff',
     borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 3,
+      },
+      web: {
+        boxShadow: '0px 2px 8px rgba(0,0,0,0.1)',
+      },
+    }),
   },
   checklistTitle: {
     fontSize: 20,

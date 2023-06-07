@@ -17,7 +17,7 @@ const App = () => {
     if (token) {
       dispatch(loadUser())
     } else {
-      dispatch({ type: 'USER_FAIL' }); // this sets isUserLoading to false
+      dispatch({ type: 'USER_FAIL' });
     }
   }, [dispatch, token])
 
